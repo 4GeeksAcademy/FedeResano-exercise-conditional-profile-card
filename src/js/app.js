@@ -27,8 +27,10 @@ function render(variables = {}) {
   // here we ask the logical questions to make decisions on how to build the html
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
   let cover;
-  variables.includeCover == true ? cover = `<div class="cover"><img src="${variables.background}"/></div>` : cover = '<div class="cover"></div>';
-  variables.socialMediaPosition == "right" ? 'position-right' : 'position-left';
+  variables.includeCover == true
+    ? (cover = `<div class="cover"><img src="${variables.background}"/></div>`)
+    : (cover = '<div class="cover"></div>');
+  variables.socialMediaPosition == "right" ? "position-right" : "position-left";
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
@@ -49,7 +51,7 @@ function render(variables = {}) {
 /**
  * Don't change any of the lines below, here is where we do the logic for the dropdowns
  */
-window.onload = function () {
+window.onload = function() {
   window.variables = {
     // if includeCover is true the algorithm should show the cover image
     includeCover: true,
@@ -72,8 +74,8 @@ window.onload = function () {
   };
   render(window.variables); // render the card for the first time
 
-  document.querySelectorAll(".picker").forEach(function (elm) {
-    elm.addEventListener("change", function (e) {
+  document.querySelectorAll(".picker").forEach(function(elm) {
+    elm.addEventListener("change", function(e) {
       // <- add a listener to every input
       const attribute = e.target.getAttribute("for"); // when any input changes, collect the value
       let values = {};
@@ -81,10 +83,10 @@ window.onload = function () {
         this.value == "" || this.value == "null"
           ? null
           : this.value == "true"
-            ? true
-            : this.value == "false"
-              ? false
-              : this.value;
+          ? true
+          : this.value == "false"
+          ? false
+          : this.value;
       render(Object.assign(window.variables, values)); // render again the card with new values
     });
   });
